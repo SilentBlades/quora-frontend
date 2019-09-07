@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 // import AnswerComponent from './Answer/AnswerComponent.js';
 // import QuestionComponent from './Question/QuestionComponent.js';
 // import CommonComponent from './Common/CommonComponent.js';
-import UserComponent from './User/UserComponent.js';
+import SignupComponent from './UserComponent/SignupComponent.js';
 
 export default class App extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class App extends Component {
         <AnswerComponent />
         <QuestionComponent />
         <CommonComponent /> */}
-        <UserComponent />
+        <SignupComponent />
       </div>
     );
   }

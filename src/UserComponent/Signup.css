@@ -27,3 +27,17 @@ textarea{
     padding: 5px;
     margin-bottom: 10px;
 }
+
+select{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button{
+    background: orange;
+    border: none;
+    height: 25px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 20%;
+}
