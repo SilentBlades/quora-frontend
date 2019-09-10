@@ -46,3 +46,15 @@ button{
     margin-bottom: 10px;
     padding: 5px;
 }
+
+.errorMessage{
+    border: 1px solid red;
+    border-radius: 10px;
+    background: #FFBABA;
+    color: red;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: small;
+    display: block;
+    text-align: center;
+}

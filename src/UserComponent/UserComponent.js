@@ -18,21 +18,8 @@ export default class UserComponent extends Component {
             login: true
         }
 
-        this.handlePostSignupForm = this.handlePostSignupForm.bind(this);
-        this.handlePostLoginForm = this.handlePostLoginForm.bind(this);
         this.handleClickSignup = this.handleClickSignup.bind(this);
         this.handleClickLogin = this.handleClickLogin.bind(this);
-    }
-
-    handlePostSignupForm(event) {
-        const data = new FormData(event.target);
-        console.log(data.get('first_name'));
-        event.preventDefault();
-    }
-
-    handlePostLoginForm(event) {
-        const data = new FormData(event.target);
-        console.log(data.get('email'));
     }
 
     handleClickLogin() {
