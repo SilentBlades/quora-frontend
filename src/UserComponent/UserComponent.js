@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import './SignupComponent.css';
+import SignupComponent from './SignupComponent.js';
+import LoginComponent from './LoginComponent.js';
+import './UserComponent.css';
 
 /*
  * 1. User Signup
@@ -13,7 +14,14 @@ export default class UserComponent extends Component {
     constructor(props) {
         super(props);
 
+        this.state={
+            login: true
+        }
+
         this.handlePostSignupForm = this.handlePostSignupForm.bind(this);
+        this.handlePostLoginForm = this.handlePostLoginForm.bind(this);
+        this.handleClickSignup = this.handleClickSignup.bind(this);
+        this.handleClickLogin = this.handleClickLogin.bind(this);
     }
 
     handlePostSignupForm(event) {
@@ -22,96 +30,31 @@ export default class UserComponent extends Component {
         event.preventDefault();
     }
 
+    handlePostLoginForm(event) {
+        const data = new FormData(event.target);
+        console.log(data.get('email'));
+    }
+
+    handleClickLogin() {
+        this.setState({
+            login: false
+        });
+    }
+
+    handleClickSignup() {
+        this.setState({
+            login: true
+        });
+    }
+
     render() {
         return (
             <div className="div-center">
-                <SignupForm handlePostSignupForm={this.handlePostSignupForm} />
+                {
+                    (this.state.login) ? (<LoginComponent handlePostLoginForm={this.handlePostLoginForm} handleClickLogin={this.handleClickLogin} />) 
+                                       : (<SignupComponent handlePostSignupForm={this.handlePostSignupForm} handleClickSignup={this.handleClickSignup} />)
+                }
             </div>
         )
     }
-}
-
-function SignupForm(props) {
-
-    return (
-        <Router>
-            <h1>
-                Signup
-            <Link to="/login" className="link-noDecoration"> or Login</Link>
-            </h1>
-            <form className="form-flex-center" onSubmit={props.handlePostSignupForm}>
-                <label>
-                    First Name
-            </label>
-                <input type="text" name="first_name" placeholder="First Name" />
-                <label>
-                    Last Name
-            </label>
-                <input type="text" placeholder="Last Name" />
-                <label>
-                    User Name
-            </label>
-                <input type="text" placeholder="User Name" />
-                <label>
-                    Email Address
-            </label>
-                <input type="email" placeholder="Email Address" />
-                <label>
-                    Password
-            </label>
-                <input type="password" placeholder="abc@123" />
-                <label>
-                    Country
-            </label>
-                <select>
-                    <option value="india" defaultValue="selected">
-                        India
-                </option>
-                    <option value="usa">
-                        USA
-                </option>
-                    <option value="canada">
-                        Canada
-                </option>
-                    <option value="england">
-                        England
-                </option>
-                </select>
-                <label>
-                    About Me
-            </label>
-                <textarea rows="4" cols="50" />
-                <label>
-                    Contact Number
-            </label>
-                <input type="tel" placeholder="000-000-0000" />
-                <button>
-                    Submit
-            </button>
-            </form>
-            <Route path="/login" component={LoginForm} />
-        </Router>
-    );
-}
-
-function LoginForm(props) {
-    return (
-        <Router>
-            <h1>
-                Login
-            <Link to="/signup" className="link-noDecoration"> or Signup</Link>
-            </h1>
-            <form>
-                <label>
-                    Email Address
-            </label>
-                <input type="email" placeholder="Email Address" />
-                <label>
-                    Password
-            </label>
-                <input type="password" placeholder="abc@123" />
-            </form>
-            <Route path="/Signup" component={SignupForm} />
-        </Router>
-    );
 }

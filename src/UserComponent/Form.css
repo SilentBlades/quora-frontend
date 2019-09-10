@@ -1,10 +1,3 @@
-.div-center{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .form-flex-center{
     display: flex;
     flex-direction: column;
@@ -44,4 +37,12 @@ button{
 .link-noDecoration{
     text-decoration: none;
     font-size: large;
+}
+
+.login-button{
+    background: rgb(105, 163, 18);
+    border: none;
+    height: 25px;
+    margin-bottom: 10px;
+    padding: 5px;
 }
