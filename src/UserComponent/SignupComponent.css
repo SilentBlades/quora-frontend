@@ -39,5 +39,9 @@ button{
     height: 25px;
     margin-bottom: 10px;
     padding: 5px;
-    width: 20%;
+}
+
+.link-noDecoration{
+    text-decoration: none;
+    font-size: large;
 }
