@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import './Form.css';
-import SignupComponent from './SignupComponent';
 import Axios from 'axios';
 
 export default class LoginComponent extends Component {
@@ -14,6 +13,7 @@ export default class LoginComponent extends Component {
         }
 
         this.handlePostLoginForm = this.handlePostLoginForm.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handlePostLoginForm(event) {
@@ -40,7 +40,13 @@ export default class LoginComponent extends Component {
         })
         .catch(err => {
             console.log(err.response);
-            if(err.response.status > 300 && err.response.status < 500) {
+            if(err.response === undefined || err.response.status >= 500) {
+                this.setState({
+                    showLabel: true,
+                    errorMessage: 'Something went wrong!!'
+                })
+            }
+            else if(err.response.status > 300 && err.response.status < 500) {
                 this.setState({
                     showLabel: true,
                     errorMessage: err.response.data.message
@@ -51,22 +57,29 @@ export default class LoginComponent extends Component {
         event.preventDefault();
     }
 
+
+    handleChange() {
+        this.setState({
+            showLabel: false
+        })
+    }
+
     render() {
         return (
-            <Router>
+            <div className="div-center">
                 <h1>
                     Login
-                <Link to="/signup" onClick={this.props.handleClickLogin} className="link-noDecoration"> or Signup</Link>
+                <Link to="/signup" className="link-noDecoration"> or Signup</Link>
                 </h1>
                 <form className="form-flex-center" onSubmit={this.handlePostLoginForm}>
                     <label>
                         Email Address
                 </label>
-                <input type="email" name="email" placeholder="Email Address" required />
+                <input type="email" name="email" placeholder="Email Address" onChange={this.handleChange} required />
                 <label>
                         Password
                 </label>
-                    <input type="password" name="password" placeholder="abc@123" required />
+                    <input type="password" name="password" placeholder="abc@123" onChange={this.handleChange} required />
                 <button className="login-button">
                     Submit
                 </button>
@@ -74,8 +87,7 @@ export default class LoginComponent extends Component {
                     {this.state.errorMessage}
                 </label>
                 </form>
-                <Route path="/Signup" component={SignupComponent} />
-            </Router>
+            </div>
         );
     }
 }

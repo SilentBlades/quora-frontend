@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SignupComponent from './SignupComponent.js';
 import LoginComponent from './LoginComponent.js';
 import './UserComponent.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 /*
  * 1. User Signup
@@ -14,7 +15,7 @@ export default class UserComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             login: true
         }
 
@@ -36,11 +37,12 @@ export default class UserComponent extends Component {
 
     render() {
         return (
-            <div className="div-center">
-                {
-                    (this.state.login) ? (<LoginComponent handlePostLoginForm={this.handlePostLoginForm} handleClickLogin={this.handleClickLogin} />) 
-                                       : (<SignupComponent handlePostSignupForm={this.handlePostSignupForm} handleClickSignup={this.handleClickSignup} />)
-                }
+            <div>
+                <Router>
+                    <Route exact path="/" component={LoginComponent} />
+                    <Route exact path="/login" component={LoginComponent} />
+                    <Route exact path="/signup" component={SignupComponent} />
+                </Router>
             </div>
         )
     }
