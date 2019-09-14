@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Form.css';
 import Axios from 'axios';
 
@@ -25,7 +25,8 @@ export default class LoginComponent extends Component {
         const encodedAuthenticationString = "Basic " + encodedString;
 
         Axios({
-            url:'http://localhost:8080/api/user/signin',
+            //url:'http://localhost:9000/user/signin',
+            url:'http://localhost:9000/testAPI/signin',
             method: 'post',
             headers: {
                 'authorization': encodedAuthenticationString,
@@ -36,7 +37,7 @@ export default class LoginComponent extends Component {
             this.setState({
                 showLabel: false,
             })
-            console.log(response)
+            console.log(response.data)
         })
         .catch(err => {
             console.log(err.response);
@@ -46,7 +47,7 @@ export default class LoginComponent extends Component {
                     errorMessage: 'Something went wrong!!'
                 })
             }
-            else if(err.response.status > 300 && err.response.status < 500) {
+            else if(err.response.status > 300 && err.response.status < 400) {
                 this.setState({
                     showLabel: true,
                     errorMessage: err.response.data.message
@@ -69,7 +70,7 @@ export default class LoginComponent extends Component {
             <div className="div-center">
                 <h1>
                     Login
-                <Link to="/signup" className="link-noDecoration"> or Signup</Link>
+                    <Link to="/signup" className="link-noDecoration"> or Signup</Link>
                 </h1>
                 <form className="form-flex-center" onSubmit={this.handlePostLoginForm}>
                     <label>
